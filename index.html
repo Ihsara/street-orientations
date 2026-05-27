@@ -8,146 +8,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#f4f1ea;
-    --paper-deep:#ece7da;
-    --ink:#1b1b1b;
-    --ink-soft:#534f46;
-    --ink-faint:#8c877a;
-    --rule:#cdc6b4;
-    --accent:#c0392b;           /* the project red */
-    --grid:#3a6b5e;             /* "more ordered" end */
-    --chaos:#b9602a;            /* "more disordered" end */
-    --maxw:1180px;
-  }
-  *{box-sizing:border-box;}
-  html{-webkit-text-size-adjust:100%;}
-  body{
-    margin:0;
-    background:
-      radial-gradient(120% 80% at 80% -10%, #faf8f2 0%, var(--paper) 45%, var(--paper-deep) 100%);
-    color:var(--ink);
-    font-family:"Fraunces", Georgia, serif;
-    font-optical-sizing:auto;
-    line-height:1.5;
-    text-rendering:optimizeLegibility;
-    -webkit-font-smoothing:antialiased;
-  }
-  .mono{font-family:"Spline Sans Mono", ui-monospace, monospace;}
-
-  /* ---- masthead ---- */
-  header.masthead{
-    max-width:var(--maxw);
-    margin:0 auto;
-    padding:clamp(2.2rem,6vw,4.5rem) clamp(1.2rem,5vw,3rem) clamp(1.4rem,3vw,2.2rem);
-  }
-  .kicker{
-    font-family:"Spline Sans Mono", monospace;
-    font-size:.72rem;
-    letter-spacing:.32em;
-    text-transform:uppercase;
-    color:var(--ink-faint);
-    display:flex;
-    gap:.9em;
-    align-items:center;
-    margin:0 0 1.1rem;
-  }
-  .kicker::after{content:"";flex:1;height:1px;background:var(--rule);}
-  h1{
-    font-weight:900;
-    font-size:clamp(2.6rem,8vw,5.6rem);
-    line-height:.96;
-    letter-spacing:-.02em;
-    margin:0;
-    max-width:14ch;
-  }
-  h1 em{font-style:italic;font-weight:500;color:var(--accent);}
-  .standfirst{
-    margin:1.4rem 0 0;
-    max-width:54ch;
-    font-size:clamp(1.02rem,1.6vw,1.22rem);
-    color:var(--ink-soft);
-  }
-  .standfirst b{font-weight:600;color:var(--ink);}
-
-  /* ---- order-score legend ---- */
-  .legend{
-    max-width:var(--maxw);
-    margin:clamp(1.6rem,4vw,2.6rem) auto 0;
-    padding:0 clamp(1.2rem,5vw,3rem);
-    display:flex;
-    flex-wrap:wrap;
-    gap:.6rem 1.4rem;
-    align-items:center;
-  }
-  .scalebar{
-    height:.5rem;width:min(260px,42vw);border-radius:2px;
-    background:linear-gradient(90deg,var(--grid),var(--paper-deep) 50%,var(--chaos));
-    box-shadow:inset 0 0 0 1px rgba(27,27,27,.12);
-  }
-  .legend .lab{font-family:"Spline Sans Mono",monospace;font-size:.74rem;letter-spacing:.04em;color:var(--ink-soft);}
-  .legend .lab.lo{color:var(--grid);}
-  .legend .lab.hi{color:var(--chaos);}
-
-  /* ---- country plates ---- */
-  main{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.2rem,5vw,3rem) 4rem;}
-  .plate{margin-top:clamp(2.4rem,6vw,4rem);}
-  .plate-head{
-    display:flex;align-items:baseline;gap:1rem;
-    border-bottom:2px solid var(--ink);
-    padding-bottom:.5rem;margin-bottom:1.6rem;
-  }
-  .plate-head h2{
-    font-size:clamp(1.5rem,3.2vw,2.3rem);font-weight:600;margin:0;letter-spacing:-.01em;
-  }
-  .plate-head .meta{font-family:"Spline Sans Mono",monospace;font-size:.74rem;color:var(--ink-faint);letter-spacing:.06em;margin-left:auto;}
-
-  .roses{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
-    gap:clamp(1rem,2.4vw,2rem) clamp(.8rem,2vw,1.6rem);
-  }
-  figure.rose{
-    margin:0;display:flex;flex-direction:column;align-items:center;gap:.5rem;
-    padding:.4rem .2rem .9rem;border-radius:4px;
-    transition:background .25s ease;cursor:default;
-  }
-  figure.rose:hover,figure.rose:focus-within{background:rgba(27,27,27,.035);}
-  figure.rose canvas{width:100%;height:auto;aspect-ratio:1;max-width:188px;display:block;}
-  .city{font-size:1.18rem;font-weight:600;letter-spacing:-.01em;line-height:1.1;text-align:center;}
-  .score{
-    font-family:"Spline Sans Mono",monospace;font-size:.8rem;letter-spacing:.02em;
-    display:flex;align-items:center;gap:.5em;color:var(--ink-soft);
-  }
-  .score .dot{width:.62em;height:.62em;border-radius:50%;flex:none;}
-  .score .val{font-weight:500;color:var(--ink);}
-  .stat{font-family:"Spline Sans Mono",monospace;font-size:.68rem;color:var(--ink-faint);letter-spacing:.04em;}
-
-  /* ---- method note + footer ---- */
-  .note{
-    max-width:62ch;margin:clamp(3rem,7vw,5rem) 0 0;
-    font-size:.98rem;color:var(--ink-soft);
-    border-top:1px solid var(--rule);padding-top:1.4rem;
-  }
-  .note h3{font-family:"Spline Sans Mono",monospace;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin:0 0 .7rem;}
-  .note p{margin:0 0 .8rem;}
-  .note code{font-family:"Spline Sans Mono",monospace;font-size:.86em;background:rgba(27,27,27,.06);padding:.1em .4em;border-radius:3px;}
-  footer{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.2rem,5vw,3rem) 3rem;color:var(--ink-faint);font-family:"Spline Sans Mono",monospace;font-size:.72rem;letter-spacing:.05em;}
-  footer a{color:var(--ink-soft);}
-
-  .loading{max-width:var(--maxw);margin:3rem auto;padding:0 3rem;color:var(--ink-faint);font-family:"Spline Sans Mono",monospace;}
-
-  @media (prefers-reduced-motion:reduce){
-    *{transition:none!important;animation:none!important;}
-  }
-</style>
+<link rel="stylesheet" href="app.css">
 </head>
 <body>
+<nav class="top">
+  <span class="brand">Street Orientations</span>
+  <a href="index.html" aria-current="page">Overview</a>
+  <a href="finland.html">Finland</a>
+  <a href="vietnam.html">Vietnam</a>
+</nav>
+
 <header class="masthead">
   <p class="kicker">Urban Morphology · OSM Plate I</p>
-  <h1 id="title">Which cities were <em>drawn with a ruler?</em></h1>
-  <p class="standfirst" id="standfirst">
+  <h1>Which cities were <em>drawn with a ruler?</em></h1>
+  <p class="standfirst">
     Every street has a compass bearing. Pile up a city's streets — each weighted by its
     length — into <b>thirty-six directional bins</b> and the shape that emerges is a fingerprint:
     a tight cross for a planned grid, a near-circle for a city that grew organically.
@@ -161,153 +35,54 @@
   <span class="lab hi">disordered · 1.00</span>
 </div>
 
-<main id="plates">
-  <p class="loading">Drawing roses…</p>
-</main>
+<main id="plates"><p class="loading">Drawing roses…</p></main>
 
 <footer>
   <span id="srcline">Data: OpenStreetMap drive networks, 5 km radius · </span>
   Method after Geoff Boeing, “Urban Spatial Order” (2019).
 </footer>
 
+<script src="app.js"></script>
 <script>
-const NS = 36;                 // bins
-const TAU = Math.PI * 2;
-
-// Map order score (0..1) onto the grid→chaos diverging colour, matching the legend.
-function scoreColor(s){
-  // anchor points in the same family as --grid / --chaos
-  const grid  = [58,107,94];   // #3a6b5e
-  const paper = [205,198,180];
-  const chaos = [185,96,42];   // #b9602a
-  let a,b,t;
-  if(s < 0.5){ a=grid; b=paper; t=s/0.5; }
-  else       { a=paper; b=chaos; t=(s-0.5)/0.5; }
-  const m=i=>Math.round(a[i]+(b[i]-a[i])*t);
-  return `rgb(${m(0)},${m(1)},${m(2)})`;
-}
-
-// Draw one length-weighted rose. Compass convention: bin i centred on i*10°,
-// North up, clockwise — identical to the matplotlib version.
-function drawRose(canvas, dist, color){
-  const dpr = Math.min(window.devicePixelRatio||1, 2);
-  const size = 188;
-  canvas.width = size*dpr; canvas.height = size*dpr;
-  const ctx = canvas.getContext("2d");
-  ctx.scale(dpr,dpr);
-  const cx=size/2, cy=size/2, R=size*0.42;
-  const maxw = Math.max(...dist, 1e-9);
-
-  // faint compass rings + cardinal ticks
-  ctx.strokeStyle="rgba(27,27,27,0.14)";
-  ctx.lineWidth=1;
-  for(const f of [0.5,1.0]){
-    ctx.beginPath(); ctx.arc(cx,cy,R*f,0,TAU); ctx.stroke();
+loadData().then(d=>{
+  document.title = d.title + " — Finland vs. Vietnam";
+  document.getElementById("srcline").textContent =
+    `Data: OpenStreetMap drive networks, 5 km radius · ${d.cities.length} cities · `;
+  const main=document.getElementById("plates");
+  main.innerHTML="";
+  const order=["Finland","Vietnam"];
+  const present=[...new Set(d.cities.map(c=>c.country))];
+  const seq=[...order.filter(c=>present.includes(c)), ...present.filter(c=>!order.includes(c))];
+  const slug = c => c.toLowerCase().replace(/[^a-z]/g,"");
+  for(const country of seq){
+    const cs=d.cities.filter(c=>c.country===country).sort((a,b)=>a.order_score-b.order_score);
+    const totalKm=cs.reduce((s,c)=>s+(c.total_km||0),0);
+    const sec=document.createElement("section");
+    sec.className="plate";
+    sec.innerHTML=`
+      <div class="plate-head">
+        <h2><a href="${slug(country)}.html">${country} →</a></h2>
+        <span class="meta">${cs.length} cities · ${Math.round(totalKm).toLocaleString()} km of street</span>
+      </div>
+      <div class="roses"></div>`;
+    const grid=sec.querySelector(".roses");
+    cs.forEach(c=>grid.appendChild(cityCard(c)));
+    main.appendChild(sec);
   }
-  ctx.strokeStyle="rgba(27,27,27,0.22)";
-  for(let k=0;k<4;k++){
-    const ang=-Math.PI/2 + k*Math.PI/2;        // N,E,S,W in screen space
-    ctx.beginPath();
-    ctx.moveTo(cx,cy);
-    ctx.lineTo(cx+Math.cos(ang)*R, cy+Math.sin(ang)*R);
-    ctx.stroke();
-  }
-
-  // wedges
-  const bin = TAU/NS;
-  for(let i=0;i<NS;i++){
-    const r = R*Math.sqrt(dist[i]/maxw);       // sqrt → area-proportional, like a histogram on a disk
-    if(r<=0) continue;
-    // compass angle of bin centre = i*10°, North up & clockwise:
-    const centre = -Math.PI/2 + (i*bin);       // screen: 0 at North, increasing clockwise
-    const a0 = centre - bin/2, a1 = centre + bin/2;
-    ctx.beginPath();
-    ctx.moveTo(cx,cy);
-    ctx.arc(cx,cy,r,a0,a1);
-    ctx.closePath();
-    ctx.fillStyle=color;
-    ctx.globalAlpha=0.9;
-    ctx.fill();
-    ctx.globalAlpha=1;
-    ctx.strokeStyle="#f4f1ea";   /* paper, to separate adjacent wedges */
-    ctx.lineWidth=0.6;
-    ctx.stroke();
-  }
-
-  // cardinal letters
-  ctx.fillStyle="#534f46";
-  ctx.font="500 11px 'Spline Sans Mono', monospace";
-  ctx.textAlign="center"; ctx.textBaseline="middle";
-  const off=R+11;
-  ctx.fillText("N",cx,cy-off);
-  ctx.fillText("S",cx,cy+off);
-  ctx.fillText("E",cx+off,cy);
-  ctx.fillText("W",cx-off,cy);
-}
-
-function plate(country, cities){
-  const sec=document.createElement("section");
-  sec.className="plate";
-  const totalKm = cities.reduce((s,c)=>s+(c.total_km||0),0);
-  sec.innerHTML=`
-    <div class="plate-head">
-      <h2>${country}</h2>
-      <span class="meta">${cities.length} cities · ${Math.round(totalKm).toLocaleString()} km of street</span>
-    </div>
-    <div class="roses"></div>`;
-  const grid=sec.querySelector(".roses");
-  for(const c of cities){
-    const fig=document.createElement("figure");
-    fig.className="rose";
-    fig.tabIndex=0;
-    const col=scoreColor(c.order_score);
-    fig.innerHTML=`
-      <canvas role="img" aria-label="${c.name}: order score ${c.order_score.toFixed(2)}"></canvas>
-      <figcaption class="city">${c.name}</figcaption>
-      <div class="score"><span class="dot" style="background:${col}"></span><span class="val">${c.order_score.toFixed(3)}</span> order</div>
-      <div class="stat">${c.edges.toLocaleString()} edges · ${c.total_km.toLocaleString()} km</div>`;
-    grid.appendChild(fig);
-    drawRose(fig.querySelector("canvas"), c.dist, col);
-  }
-  return sec;
-}
-
-fetch("data.json")
-  .then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); })
-  .then(d=>{
-    document.title = d.title + " — Finland vs. Vietnam";
-    document.getElementById("srcline").textContent =
-      `Data: OpenStreetMap drive networks, 5 km radius · ${d.cities.length} cities · `;
-    const main=document.getElementById("plates");
-    main.innerHTML="";
-    // order: most-ordered first within each country, countries in data order
-    const order = ["Finland","Vietnam"];
-    const present = [...new Set(d.cities.map(c=>c.country))];
-    const seq = [...order.filter(c=>present.includes(c)), ...present.filter(c=>!order.includes(c))];
-    for(const country of seq){
-      const cs=d.cities.filter(c=>c.country===country)
-                       .sort((a,b)=>a.order_score-b.order_score);
-      main.appendChild(plate(country,cs));
-    }
-    // method note
-    const note=document.createElement("aside");
-    note.className="note";
-    note.innerHTML=`
-      <h3>How to read this</h3>
-      <p>Each rose is a city's streets sorted by direction. A bin's <b>radius</b> grows with the
-      total length of road pointing that way (counted both ways, so every rose is symmetric).
-      A four-armed cross means most streets run along two perpendicular axes — a grid.
-      A full disk means streets point every which way.</p>
-      <p>The <b>order score</b> is the streets' directional entropy, normalised so
-      <code>0</code> is a perfect grid and <code>1</code> is perfectly uniform. Within this
-      sample the scores sit in a narrow band near the disordered end — the contrast is real but
-      subtle at a 5&nbsp;km radius across the full driving network.</p>`;
-    main.appendChild(note);
-  })
-  .catch(e=>{
-    document.getElementById("plates").innerHTML=
-      `<p class="loading">Couldn't load <code>data.json</code> (${e.message}). Serve this folder over HTTP, e.g. <code>python -m http.server</code>, rather than opening the file directly.</p>`;
-  });
+  const note=document.createElement("aside");
+  note.className="note";
+  note.innerHTML=`
+    <h3>How to read this</h3>
+    <p>Each rose is a city's streets sorted by direction. A bin's <b>radius</b> grows with the
+    total length of road pointing that way (counted both ways, so every rose is symmetric).
+    A four-armed cross means most streets run along two perpendicular axes — a grid.
+    A full disk means streets point every which way.</p>
+    <p>The <b>order score</b> is the streets' directional entropy, normalised so
+    <code>0</code> is a perfect grid and <code>1</code> is perfectly uniform. Within this
+    sample the scores sit in a narrow band near the disordered end — the contrast is real but
+    subtle at a 5&nbsp;km radius across the full driving network.</p>`;
+  main.appendChild(note);
+}).catch(e=>showLoadError(document.getElementById("plates"), e));
 </script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vietnam — Street Orientations</title>
+<meta name="description" content="Street-orientation rose plots for five Vietnamese cities, ranked by orientation-entropy order score.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<nav class="top">
+  <span class="brand">Street Orientations</span>
+  <a href="index.html">Overview</a>
+  <a href="finland.html">Finland</a>
+  <a href="vietnam.html" aria-current="page">Vietnam</a>
+</nav>
+
+<header class="masthead">
+  <p class="kicker">Urban Morphology · Vietnam</p>
+  <h1>Vietnam, <em>street by street</em></h1>
+  <p class="standfirst" id="standfirst">Five cities, each a 5&nbsp;km disk around its historic centre.</p>
+</header>
+
+<div class="legend" aria-hidden="true">
+  <span class="lab lo">0.00 · grid</span>
+  <span class="scalebar"></span>
+  <span class="lab hi">disordered · 1.00</span>
+</div>
+
+<main id="page" data-country="Vietnam" data-other="Finland"><p class="loading">Drawing roses…</p></main>
+
+<footer>
+  <span id="srcline"></span>
+  Method after Geoff Boeing, “Urban Spatial Order” (2019).
+</footer>
+
+<script src="app.js"></script>
+<script src="country.js"></script>
+</body>
+</html>
