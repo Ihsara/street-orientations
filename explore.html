@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explore — Street Orientations</title>
+<meta name="description" content="Filter and compare street-orientation roses across the major cities of Finland and Vietnam.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<nav class="top">
+  <span class="brand">Street Orientations</span>
+  <a href="index.html">Overview</a>
+  <a href="explore.html" aria-current="page">Explore</a>
+  <a href="finland.html">Finland</a>
+  <a href="vietnam.html">Vietnam</a>
+</nav>
+
+<header class="masthead">
+  <p class="kicker">Urban Morphology · Explore</p>
+  <h1>All the cities, <em>one wall</em></h1>
+  <p class="standfirst">Every major city of Finland and Vietnam as a 3&nbsp;km disk around its historic centre.
+    Filter by country or class, sort, search — and watch the order-score strip to see whether the two
+    countries' grids actually separate.</p>
+</header>
+
+<main id="explore">
+  <section id="strip" class="strip" aria-label="Order-score strip"></section>
+
+  <div class="filterbar">
+    <div class="seg" role="group" aria-label="Country">
+      <button data-country="All">All</button>
+      <button data-country="Finland">Finland</button>
+      <button data-country="Vietnam">Vietnam</button>
+    </div>
+    <div id="chips" class="chips" aria-label="Class"></div>
+    <label class="ctl">Sort
+      <select id="sort">
+        <option value="order">order score</option>
+        <option value="population">population</option>
+        <option value="km">km of street</option>
+        <option value="name">name</option>
+      </select>
+    </label>
+    <input id="search" class="search" type="search" placeholder="Search city…" aria-label="Search city">
+  </div>
+
+  <div id="count" class="count"></div>
+  <div id="egrid" class="roses detail"><p class="loading">Drawing roses…</p></div>
+</main>
+
+<footer>
+  <span id="srcline"></span>
+  Method after Geoff Boeing, “Urban Spatial Order” (2019).
+  <span id="classnote" class="classnote"></span>
+</footer>
+
+<script src="app.js"></script>
+<script src="explore.js"></script>
+</body>
+</html>

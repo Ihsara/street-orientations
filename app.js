@@ -84,3 +84,22 @@ function showLoadError(container, e){
   container.innerHTML =
     `<p class="loading">Couldn't load <code>data.json</code> (${e.message}). Serve this folder over HTTP, e.g. <code>python -m http.server</code>, rather than opening the file directly.</p>`;
 }
+
+// Dominant street axis as a two-ended compass label (e.g. "NE–SW"). Roses are
+// symmetric, so fold each bin with its opposite (i and i+18) and report the axis.
+const DIRS8 = ["N","NE","E","SE","S","SW","W","NW"];
+function dominantAxis(dist){
+  let best=0, bestLen=-1;
+  for(let i=0;i<18;i++){
+    const len = dist[i] + dist[i+18];
+    if(len>bestLen){ bestLen=len; best=i; }
+  }
+  let k = Math.round((best*10)/45) % 8;
+  if(k >= 4) k -= 4;
+  return `${DIRS8[k]}–${DIRS8[k+4]}`;
+}
+
+// Normalize a string for diacritic-insensitive substring search ("Hué" -> "hue").
+function normText(s){
+  return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+}

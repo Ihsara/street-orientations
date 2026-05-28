@@ -6,22 +6,7 @@
   const other = page.dataset.other;
   const slug = s => s.toLowerCase().replace(/[^a-z]/g,"");
 
-  // Which 10° bin holds the most length, as a compass label — a factual readout
-  // of where a city's streets mostly point.
-  // The dominant axis as a two-ended compass label (e.g. "NE–SW"). Roses are
-  // symmetric, so we collapse each bin with its opposite and report the axis.
-  const DIRS8 = ["N","NE","E","SE","S","SW","W","NW"];
-  function dominantAxis(dist){
-    // fold 36 bins into 18 axes (i and i+18 are the same line), find the longest
-    let best=0, bestLen=-1;
-    for(let i=0;i<18;i++){
-      const len = dist[i] + dist[i+18];
-      if(len>bestLen){ bestLen=len; best=i; }
-    }
-    let k = Math.round((best*10)/45) % 8;    // nearest 8-point direction (0=N..7=NW)
-    if(k >= 4) k -= 4;                        // fold to the N/E half so the label is consistent
-    return `${DIRS8[k]}–${DIRS8[k+4]}`;       // e.g. always "N–S", never "S–N"
-  }
+  // dominantAxis() is shared — defined in app.js, which loads before this file.
 
   loadData().then(d=>{
     const cs = d.cities.filter(c=>c.country===country).sort((a,b)=>a.order_score-b.order_score);
@@ -37,9 +22,9 @@
     const leastGrid = cs[cs.length-1];      // highest score
 
     document.getElementById("srcline").textContent =
-      `Data: OpenStreetMap drive networks, 5 km radius · ${country}, ${cs.length} cities · `;
+      `Data: OpenStreetMap drive networks, 3 km radius · ${country}, ${cs.length} cities · `;
     document.getElementById("standfirst").innerHTML =
-      `Five ${country === "Finland" ? "Finnish" : "Vietnamese"} cities as 5&nbsp;km disks around their historic centres, ` +
+      `${cs.length} ${country === "Finland" ? "Finnish" : "Vietnamese"} cities as 3&nbsp;km disks around their historic centres, ` +
       `ordered from <b>most grid-like</b> to <b>least</b>. Lower order score = streets cluster on fewer axes.`;
 
     page.innerHTML="";
@@ -117,7 +102,7 @@
       <p>A bin's <b>radius</b> grows with the total length of road pointing that way (counted both
       ways, so every rose is symmetric). The <b>order score</b> is the streets' directional entropy
       normalised so <code>0</code> is a perfect grid and <code>1</code> is perfectly uniform.</p>
-      <p>Scores here sit in a narrow band near the disordered end — at a 5&nbsp;km radius across the
+      <p>Scores here sit in a narrow band near the disordered end — at a 3&nbsp;km radius across the
       full driving network the differences are real but subtle, so the rose's <em>shape</em> often
       tells you more than the third decimal place.</p>`;
     page.appendChild(note);

@@ -131,3 +131,28 @@ footer a{color:var(--ink-soft);}
 .loading{max-width:var(--maxw);margin:3rem auto;padding:0 3rem;color:var(--ink-faint);font-family:"Spline Sans Mono",monospace;}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+
+/* ---- explore page ---- */
+.strip{position:relative;margin:1.5rem 0 0.5rem;padding:0 0.5rem}
+.strip-axis{display:flex;justify-content:space-between;font:500 .72rem/1 'Spline Sans Mono',monospace;color:var(--ink-soft)}
+.strip-lanes{margin:.4rem 0}
+.lane{position:relative;height:26px;border-bottom:1px solid var(--rule)}
+.lane .dot{position:absolute;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border:none;border-radius:50%;padding:0;cursor:pointer;transition:transform .1s}
+.lane .dot:hover,.lane .dot:focus{transform:scale(1.5);outline:none;z-index:3}
+.lane .dot.dim{opacity:.18}
+.strip-legend{display:flex;gap:1rem;font:600 .72rem/1 'Spline Sans Mono',monospace;margin-top:.3rem}
+.strip-legend .fi{color:#3a6b5e}.strip-legend .vn{color:#b9602a}
+.strip-pop{position:absolute;transform:translate(-50%,-115%);background:var(--paper,#fff);border:1px solid var(--rule);border-radius:8px;padding:6px;box-shadow:0 4px 16px rgba(0,0,0,.12);pointer-events:none;z-index:5;text-align:center}
+.strip-pop .pp-name{font:600 .8rem/1.1 'Fraunces',serif}
+.strip-pop .pp-sc{font:500 .7rem/1 'Spline Sans Mono',monospace;color:var(--ink-soft)}
+.filterbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1rem 0;padding:.6rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.seg button,.chip{font:500 .8rem 'Spline Sans Mono',monospace;border:1px solid var(--rule);background:transparent;color:var(--ink-soft);border-radius:999px;padding:.25rem .7rem;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--paper,#fff)}
+.chip.on{border-color:#b9602a;color:#b9602a}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap}
+.ctl{font:500 .75rem 'Spline Sans Mono',monospace;color:var(--ink-soft);display:flex;gap:.3rem;align-items:center}
+.ctl select{font:inherit;padding:.2rem;border:1px solid var(--rule);border-radius:6px;background:transparent}
+.search{font:500 .8rem 'Spline Sans Mono',monospace;padding:.25rem .6rem;border:1px solid var(--rule);border-radius:999px;background:transparent;margin-left:auto}
+.count{font:500 .75rem 'Spline Sans Mono',monospace;color:var(--ink-soft);margin:.3rem 0 1rem}
+.badge{font-weight:500}
+.classnote{display:block;margin-top:.4rem;font-size:.85em;opacity:.8}

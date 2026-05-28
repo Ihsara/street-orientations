@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Street Orientations — Finland vs. Vietnam</title>
-<meta name="description" content="Length-weighted street-bearing rose plots for five Finnish and five Vietnamese cities, with an orientation-entropy order score.">
+<meta name="description" content="Length-weighted street-bearing rose plots for the major cities of Finland and Vietnam, with an orientation-entropy order score.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@
 <nav class="top">
   <span class="brand">Street Orientations</span>
   <a href="index.html" aria-current="page">Overview</a>
+  <a href="explore.html">Explore</a>
   <a href="finland.html">Finland</a>
   <a href="vietnam.html">Vietnam</a>
 </nav>
@@ -25,7 +26,7 @@
     Every street has a compass bearing. Pile up a city's streets — each weighted by its
     length — into <b>thirty-six directional bins</b> and the shape that emerges is a fingerprint:
     a tight cross for a planned grid, a near-circle for a city that grew organically.
-    Five Finnish cities, five Vietnamese ones, ranked by an <b>orientation-entropy order score</b>.
+    The major cities of Finland and Vietnam, ranked by an <b>orientation-entropy order score</b>.
   </p>
 </header>
 
@@ -38,7 +39,7 @@
 <main id="plates"><p class="loading">Drawing roses…</p></main>
 
 <footer>
-  <span id="srcline">Data: OpenStreetMap drive networks, 5 km radius · </span>
+  <span id="srcline">Data: OpenStreetMap drive networks, 3 km radius · </span>
   Method after Geoff Boeing, “Urban Spatial Order” (2019).
 </footer>
 
@@ -47,7 +48,7 @@
 loadData().then(d=>{
   document.title = d.title + " — Finland vs. Vietnam";
   document.getElementById("srcline").textContent =
-    `Data: OpenStreetMap drive networks, 5 km radius · ${d.cities.length} cities · `;
+    `Data: OpenStreetMap drive networks, 3 km radius · ${d.cities.length} cities · `;
   const main=document.getElementById("plates");
   main.innerHTML="";
   const order=["Finland","Vietnam"];
@@ -80,7 +81,7 @@ loadData().then(d=>{
     <p>The <b>order score</b> is the streets' directional entropy, normalised so
     <code>0</code> is a perfect grid and <code>1</code> is perfectly uniform. Within this
     sample the scores sit in a narrow band near the disordered end — the contrast is real but
-    subtle at a 5&nbsp;km radius across the full driving network.</p>`;
+    subtle at a 3&nbsp;km radius across the full driving network.</p>`;
   main.appendChild(note);
 }).catch(e=>showLoadError(document.getElementById("plates"), e));
 </script>
