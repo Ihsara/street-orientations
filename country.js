@@ -81,6 +81,24 @@
     prose.innerHTML = body;
     page.appendChild(prose);
 
+    // ---- small-N caveat (only visible on the backbone subset) ----
+    // Why: the backbone subset can dip below ~50 edges in a 3 km disk for small
+    // cities, and length-weighted entropy over 36 bins is unstable that low.
+    // Vietnam's minimum (~118) is safe; Finland has six cities under 50.
+    if (subset === "backbone") {
+      const lowN = present.filter(c => (c.edges[subset] || 0) < 50).length;
+      const caveat = document.createElement("aside");
+      caveat.className = "caveat";
+      const fiCopy =
+        `Six of Finland's 27 cities have fewer than 50 backbone edges in their 3 km disk — small enough that one long motorway segment can swing the score. We still show their roses (and you can read the edge count under each), but read those numbers as suggestive, not measurements. Vietnam has no cities under that threshold.`;
+      const vnCopy =
+        `Every Vietnamese city in this set has at least 118 backbone edges in its 3 km disk, so the score is stable for all 27. Finland is not so lucky — six of its smaller towns fall below 50 edges. Compare like for like.`;
+      caveat.innerHTML = `<p><b>A note on the backbone view.</b> ${country === "Finland" ? fiCopy : vnCopy}` +
+        (lowN ? ` <span class="mono faint">(${lowN} of ${present.length} ${country === "Finland" ? "Finnish" : "Vietnamese"} cities below the 50-edge floor in this view.)</span>` : "") +
+        `</p>`;
+      page.appendChild(caveat);
+    }
+
     // ---- ranked detail roses ----
     const sec=document.createElement("section");
     sec.className="plate";
@@ -128,7 +146,9 @@
       normalised so <code>0</code> is a perfect grid and <code>1</code> is perfectly uniform.</p>
       <p>The <em>Edges</em> filter restricts the calculation to a road-class subset: <b>arterials</b>
       keeps motorway/trunk/primary/secondary (and their link variants); <b>backbone</b> keeps only
-      motorway, trunk, and primary. Smaller subsets often expose a stronger grid signature.</p>`;
+      motorway, trunk, and primary. Smaller subsets often expose a stronger grid signature.</p>
+      <p class="faint">Scores computed from fewer than ~50 edges are noisy by construction —
+      one long arterial can swing the entropy by a lot. Read the edge count on each card.</p>`;
     page.appendChild(note);
   }
 
