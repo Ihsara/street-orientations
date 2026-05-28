@@ -156,3 +156,9 @@ footer a{color:var(--ink-soft);}
 .count{font:500 .75rem 'Spline Sans Mono',monospace;color:var(--ink-soft);margin:.3rem 0 1rem}
 .badge{font-weight:500}
 .classnote{display:block;margin-top:.4rem;font-size:.85em;opacity:.8}
+
+/* empty subset: no edges of this rank in the disk */
+.rose.empty figcaption.city{color:var(--ink-faint)}
+.rose.empty .score .val{color:var(--ink-faint);font-style:italic}
+.strip .dot.no-data{opacity:.3;border:1px dashed var(--ink-faint)}
+.filterbar-country{max-width:var(--maxw);margin:0 auto;padding:.6rem clamp(1.2rem,5vw,3rem)}

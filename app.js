@@ -55,21 +55,36 @@ function drawRose(canvas, dist, color, maxPx=188){
   ctx.fillText("E",cx+off,cy); ctx.fillText("W",cx-off,cy);
 }
 
-// Build a <figure> for one city. opts.rank (1-based) and opts.detail (bigger) optional.
+// Build a <figure> for one city. opts:
+//   rank    — 1-based rank, optional
+//   detail  — bigger canvas
+//   subset  — which edge-rank subset to render ("all" | "arterials" | "backbone"),
+//             defaults to "all"
 function cityCard(c, opts={}){
+  const subset = opts.subset || "all";
+  const score  = c.order_score[subset];
+  const dist   = c.dist[subset];
+  const edges  = c.edges[subset];
+  const km     = c.total_km[subset];
+  const empty  = score === null || edges === 0;
+
   const fig=document.createElement("figure");
-  fig.className="rose";
+  fig.className="rose" + (empty ? " empty" : "");
   fig.tabIndex=0;
-  const col=scoreColor(c.order_score);
+  const col   = empty ? "#cdc6b4" : scoreColor(score);
+  const label = empty ? "—" : score.toFixed(3);
+  const aria  = empty
+    ? `${c.name}: no ${subset} edges in 3 km radius`
+    : `${c.name}: order score ${score.toFixed(2)}`;
   const rankLine = opts.rank ? `<div class="rank">#${opts.rank} most grid-like</div>` : "";
   fig.innerHTML=`
     ${rankLine}
-    <canvas role="img" aria-label="${c.name}: order score ${c.order_score.toFixed(2)}"></canvas>
+    <canvas role="img" aria-label="${aria}"></canvas>
     <figcaption class="city">${c.name}</figcaption>
-    <div class="score"><span class="dot" style="background:${col}"></span><span class="val">${c.order_score.toFixed(3)}</span> order</div>
-    <div class="stat">${fmt(c.edges)} edges · ${fmt(c.total_km)} km</div>`;
+    <div class="score"><span class="dot" style="background:${col}"></span><span class="val">${label}</span> order</div>
+    <div class="stat">${fmt(edges)} edges · ${fmt(km)} km</div>`;
   // draw after insertion so the canvas has a context
-  queueMicrotask(()=>drawRose(fig.querySelector("canvas"), c.dist, col, opts.detail?240:188));
+  queueMicrotask(()=>drawRose(fig.querySelector("canvas"), dist, col, opts.detail?240:188));
   return fig;
 }
 
