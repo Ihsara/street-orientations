@@ -56,8 +56,8 @@ loadData().then(d=>{
   const seq=[...order.filter(c=>present.includes(c)), ...present.filter(c=>!order.includes(c))];
   const slug = c => c.toLowerCase().replace(/[^a-z]/g,"");
   for(const country of seq){
-    const cs=d.cities.filter(c=>c.country===country).sort((a,b)=>a.order_score-b.order_score);
-    const totalKm=cs.reduce((s,c)=>s+(c.total_km||0),0);
+    const cs=d.cities.filter(c=>c.country===country).sort((a,b)=>a.order_score.all-b.order_score.all);
+    const totalKm=cs.reduce((s,c)=>s+(c.total_km.all||0),0);
     const sec=document.createElement("section");
     sec.className="plate";
     sec.innerHTML=`
